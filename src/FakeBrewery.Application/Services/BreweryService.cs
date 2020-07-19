@@ -21,7 +21,7 @@ namespace FakeBrewery.Application.Services
         ///     A success result with the new beer as value.<br />
         ///     A failure result with Validation as error code if newBeer has params validation errors.
         /// </returns>
-        public async Task<Result<Beer>> AddNewBeer(Beer newBeer)
+        public async Task<Result<Beer>> AddBeerAsync(Beer newBeer)
         {
             if (Validator.IsNullOrEmpty(newBeer.Name))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The name should not be empty.");

@@ -25,7 +25,7 @@ namespace FakeBrewery.WebApi.Controllers
         public async Task<ActionResult<Beer>> AddBeer(Guid breweryId, [FromBody] AddBeerRequest createBeerRequest)
         {
             createBeerRequest.BreweryId = breweryId;
-            var result = await _breweryService.AddNewBeer(_mapper.Map<Beer>(createBeerRequest));
+            var result = await _breweryService.AddBeerAsync(_mapper.Map<Beer>(createBeerRequest));
 
             if (result.IsFailure)
                 return BadRequest(result.ErrorMessage);
