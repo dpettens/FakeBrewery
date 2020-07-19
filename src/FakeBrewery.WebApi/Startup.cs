@@ -1,3 +1,6 @@
+using AutoMapper;
+using FakeBrewery.Application.Interfaces;
+using FakeBrewery.Application.Services;
 using FakeBrewery.Infra.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,8 +23,11 @@ namespace FakeBrewery.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddDbContext<BreweryContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BreweryContext")));
+
+            services.AddScoped<IBreweryService, BreweryService>();
 
             services.AddControllers();
         }
