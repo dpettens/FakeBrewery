@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FakeBrewery.Domain.Models
 {
@@ -12,5 +13,7 @@ namespace FakeBrewery.Domain.Models
 
         public Guid BreweryId { get; set; }
         public Brewery Brewery { get; set; }
+
+        public ICollection<Stock> Stocks { get; set; }
     }
 }
