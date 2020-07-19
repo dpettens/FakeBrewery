@@ -4,14 +4,16 @@ using FakeBrewery.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FakeBrewery.Infra.Data.Migrations
 {
     [DbContext(typeof(BreweryContext))]
-    partial class BreweryContextModelSnapshot : ModelSnapshot
+    [Migration("20200719232411_AddWholesalerAndStock")]
+    partial class AddWholesalerAndStock
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,18 +118,6 @@ namespace FakeBrewery.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Wholesalers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("28cade6d-4d40-4fa2-96f5-e535a07aad7b"),
-                            Name = "BeerLovers' Shop"
-                        },
-                        new
-                        {
-                            Id = new Guid("9779f2fa-6f60-4fa9-9b18-28fb2505be6e"),
-                            Name = "Beer Market"
-                        });
                 });
 
             modelBuilder.Entity("FakeBrewery.Domain.Models.Beer", b =>
