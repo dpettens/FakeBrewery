@@ -2,6 +2,7 @@
 {
     public enum ResultErrorCode
     {
-        Validation
+        Validation,
+        NotFound
     }
 }
