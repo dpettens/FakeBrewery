@@ -33,7 +33,7 @@ namespace FakeBrewery.WebApi.Controllers
             if (result.IsFailure && result.ErrorCode == ResultErrorCode.NotFound)
                 return NotFound(result.ErrorMessage);
 
-            return Ok(result.Value);
+            return Ok();
         }
 
         [HttpDelete("{breweryId}/beers/{beerId}")]
