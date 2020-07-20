@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FakeBrewery.Application.Interfaces;
 using FakeBrewery.Domain.Models;
 using FakeBrewery.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FakeBrewery.Application.Services
 {
@@ -13,6 +16,32 @@ namespace FakeBrewery.Application.Services
         public BreweryService(BreweryContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
+
+        /// <summary>Get all beers of a brewery with their wholesalers.</summary>
+        /// <param name="breweryId">The brewery id.</param>
+        /// <returns>
+        ///     A success result with all beers as value.<br />
+        ///     A failure result with Validation as error code if breweryId is an empty Guid.<br />
+        ///     A failure result with NotFound as error code if the brewery does not exist.
+        /// </returns>
+        public async Task<Result<IEnumerable<Beer>>> GetBeersByBreweryAsync(Guid breweryId)
+        {
+            if (Validator.IsEmptyGuid(breweryId))
+                return Result.Failure<IEnumerable<Beer>>(null, ResultErrorCode.Validation, "The brewery id should not be empty.");
+
+            var brewery = await _context.Breweries.FindAsync(breweryId);
+            if (brewery == null)
+                return Result.Failure<IEnumerable<Beer>>(null, ResultErrorCode.NotFound, $"The brewery with {breweryId} was not found.");
+
+            var beers = _context.Beers
+                .Where(b => b.BreweryId == breweryId)
+                .Include(b => b.Brewery)
+                .Include(b => b.Stocks)
+                .ThenInclude(s => s.Wholesaler)
+                .AsEnumerable();
+
+            return Result.Success(beers);
         }
 
         /// <summary>Add a new beer for a specific brewery.</summary>

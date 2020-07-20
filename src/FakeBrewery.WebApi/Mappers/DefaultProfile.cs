@@ -2,11 +2,11 @@
 using FakeBrewery.Domain.Models;
 using FakeBrewery.WebApi.Dtos;
 
-namespace FakeBrewery.WebApi
+namespace FakeBrewery.WebApi.Mappers
 {
-    public class MappingProfile : Profile
+    public class DefaultProfile : Profile
     {
-        public MappingProfile()
+        public DefaultProfile()
         {
             CreateMap<AddBeerRequest, Beer>();
             CreateMap<AddStockRequest, Stock>();
