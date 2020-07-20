@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FakeBrewery.Domain.Models;
 
@@ -6,6 +7,15 @@ namespace FakeBrewery.Application.Interfaces
 {
     public interface IBreweryService
     {
+        /// <summary>Get all beers of a brewery with their wholesalers.</summary>
+        /// <param name="breweryId">The brewery id.</param>
+        /// <returns>
+        ///     A success result with all beers as value.<br />
+        ///     A failure result with Validation as error code if breweryId is an empty Guid.<br />
+        ///     A failure result with NotFound as error code if the brewery does not exist.
+        /// </returns>
+        Task<Result<IEnumerable<Beer>>> GetBeersByBreweryAsync(Guid breweryId);
+
         /// <summary>Add a new beer for a specific brewery.</summary>
         /// <param name="newBeer">The new beer to add.</param>
         /// <returns>
