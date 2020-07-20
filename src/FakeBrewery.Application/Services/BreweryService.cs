@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using FakeBrewery.Application.Interfaces;
 using FakeBrewery.Domain.Models;
@@ -26,9 +26,9 @@ namespace FakeBrewery.Application.Services
         {
             if (Validator.IsNullOrEmpty(newBeer.Name))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The name should not be empty.");
-            if(Validator.IsGreaterOrEqualThanZero(newBeer.Strength))
+            if(!Validator.IsGreaterOrEqualThanZero(newBeer.Strength))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The strength should be greater or equal than zero.");
-            if(Validator.IsGreaterThanZero(newBeer.PriceWithoutVat))
+            if(!Validator.IsGreaterThanZero(newBeer.PriceWithoutVat))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The price should be greater than zero.");
             if(Validator.IsEmptyGuid(newBeer.BreweryId))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The brewery id should not be empty.");

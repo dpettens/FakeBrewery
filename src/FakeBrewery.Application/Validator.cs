@@ -16,12 +16,22 @@ namespace FakeBrewery.Application
 
         public static bool IsGreaterOrEqualThanZero(double value)
         {
-            return value < 0;
+            return value >= 0;
         }
 
         public static bool IsGreaterThanZero(double value)
         {
-            return value <= 0;
+            return value > 0;
+        }
+
+        public static bool IsGreaterOrEqualThanZero(int value)
+        {
+            return value >= 0;
+        }
+
+        public static bool IsGreaterThanZero(int value)
+        {
+            return value > 0;
         }
 
         public static bool IsEmptyGuid(Guid value)

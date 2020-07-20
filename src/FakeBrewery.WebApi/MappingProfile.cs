@@ -9,6 +9,8 @@ namespace FakeBrewery.WebApi
         public MappingProfile()
         {
             CreateMap<AddBeerRequest, Beer>();
+            CreateMap<AddStockRequest, Stock>();
+            CreateMap<UpdateStockRequest, Stock>();
         }
     }
 }
