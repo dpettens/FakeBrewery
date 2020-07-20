@@ -44,5 +44,31 @@ namespace FakeBrewery.Application.Services
 
             return Result.Success(newStock);
         }
+
+        /// <summary>Update the stock of a beer for a specific wholesaler.</summary>
+        /// <param name="stockToUpdate">The stock to update.</param>
+        /// <returns>
+        ///     A success result with the new stock as value.<br />
+        ///     A failure result with Validation as error code if stock has params validation errors.<br />
+        ///     A failure result with NotFound as error code if the stock does not exist.
+        /// </returns>
+        public async Task<Result<Stock>> UpdateStockAsync(Stock stockToUpdate)
+        {
+            if (Validator.IsEmptyGuid(stockToUpdate.Id))
+                return Result.Failure(stockToUpdate, ResultErrorCode.Validation, "The id should not be empty.");
+            if (!Validator.IsGreaterOrEqualThanZero(stockToUpdate.Quantity))
+                return Result.Failure(stockToUpdate, ResultErrorCode.Validation, "The quantity should be greater or equal than zero.");
+
+            var stock = await _context.Stocks.FindAsync(stockToUpdate.Id);
+            if (stock == null)
+                return Result.Failure(stockToUpdate, ResultErrorCode.NotFound, $"The stock with {stockToUpdate.Id} was not found.");
+
+            // Only the quantity can be updated
+            stock.Quantity = stockToUpdate.Quantity;
+
+            await _context.SaveChangesAsync();
+
+            return Result.Success(stock);
+        }
     }
 }

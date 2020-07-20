@@ -35,5 +35,20 @@ namespace FakeBrewery.WebApi.Controllers
 
             return Ok();
         }
+
+        [HttpPatch("{wholesalerId}/stocks/{stockId}")]
+        public async Task<ActionResult<Stock>> UpdateStock(Guid stockId, [FromBody] UpdateStockRequest updateStockRequest)
+        {
+            updateStockRequest.Id = stockId;
+            var result = await _wholesalerService.UpdateStockAsync(_mapper.Map<Stock>(updateStockRequest));
+
+            if (result.IsFailure && result.ErrorCode == ResultErrorCode.Validation)
+                return UnprocessableEntity(result.ErrorMessage);
+
+            if (result.IsFailure && result.ErrorCode == ResultErrorCode.NotFound)
+                return NotFound(result.ErrorMessage);
+
+            return Ok();
+        }
     }
 }
