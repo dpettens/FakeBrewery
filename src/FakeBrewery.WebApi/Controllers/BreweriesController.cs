@@ -27,10 +27,13 @@ namespace FakeBrewery.WebApi.Controllers
             createBeerRequest.BreweryId = breweryId;
             var result = await _breweryService.AddBeerAsync(_mapper.Map<Beer>(createBeerRequest));
 
-            if (result.IsFailure)
-                return BadRequest(result.ErrorMessage);
+            if (result.IsFailure && result.ErrorCode == ResultErrorCode.Validation)
+                return UnprocessableEntity(result.ErrorMessage);
 
-            return Ok(result.Value);
+            if (result.IsFailure && result.ErrorCode == ResultErrorCode.NotFound)
+                return NotFound(result.ErrorMessage);
+
+            return Ok();
         }
 
         [HttpDelete("{breweryId}/beers/{beerId}")]
@@ -39,7 +42,7 @@ namespace FakeBrewery.WebApi.Controllers
             var result = await _breweryService.DeleteBeerAsync(beerId);
 
             if (result.IsFailure && result.ErrorCode == ResultErrorCode.Validation)
-                return BadRequest(result.ErrorMessage);
+                return UnprocessableEntity(result.ErrorMessage);
 
             if (result.IsFailure && result.ErrorCode == ResultErrorCode.NotFound)
                 return NotFound(result.ErrorMessage);

@@ -10,7 +10,8 @@ namespace FakeBrewery.Application.Interfaces
         /// <param name="newBeer">The new beer to add.</param>
         /// <returns>
         ///     A success result with the new beer as value.<br />
-        ///     A failure result with Validation as error code if newBeer has params validation errors.
+        ///     A failure result with Validation as error code if newBeer has params validation errors.<br />
+        ///     A failure result with NotFound as error code if the brewery does not exist.
         /// </returns>
         Task<Result<Beer>> AddBeerAsync(Beer newBeer);
 

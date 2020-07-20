@@ -19,7 +19,8 @@ namespace FakeBrewery.Application.Services
         /// <param name="newBeer">The new beer to add.</param>
         /// <returns>
         ///     A success result with the new beer as value.<br />
-        ///     A failure result with Validation as error code if newBeer has params validation errors.
+        ///     A failure result with Validation as error code if newBeer has params validation errors.<br />
+        ///     A failure result with NotFound as error code if the brewery does not exist.
         /// </returns>
         public async Task<Result<Beer>> AddBeerAsync(Beer newBeer)
         {
@@ -31,6 +32,10 @@ namespace FakeBrewery.Application.Services
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The price should be greater than zero.");
             if(Validator.IsEmptyGuid(newBeer.BreweryId))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The brewery id should not be empty.");
+
+            var brewery = await _context.Breweries.FindAsync(newBeer.BreweryId);
+            if (brewery == null)
+                return Result.Failure(newBeer, ResultErrorCode.NotFound, $"The brewery with {newBeer.BreweryId} was not found.");
 
             await _context.Beers.AddAsync(newBeer);
             await _context.SaveChangesAsync();
@@ -52,7 +57,7 @@ namespace FakeBrewery.Application.Services
 
             var beer = await _context.Beers.FindAsync(beerId);
             if (beer == null)
-                return Result.Failure<Beer>(null, ResultErrorCode.NotFound, $"The beer with {beerId} was not found.");
+                return Result.Failure<Beer>(null, ResultErrorCode.NotFound, $"The beer with {beerId} id was not found.");
 
             _context.Beers.Remove(beer);
             await _context.SaveChangesAsync();
