@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using FakeBrewery.Domain.Models;
 using FakeBrewery.WebApi.Dtos;
 
@@ -9,6 +9,7 @@ namespace FakeBrewery.WebApi
         public MappingProfile()
         {
             CreateMap<AddBeerRequest, Beer>();
+            CreateMap<AddStockRequest, Stock>();
         }
     }
 }

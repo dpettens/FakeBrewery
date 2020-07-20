@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace FakeBrewery.Application
 {
@@ -20,6 +20,16 @@ namespace FakeBrewery.Application
         }
 
         public static bool IsGreaterThanZero(double value)
+        {
+            return value > 0;
+        }
+
+        public static bool IsGreaterOrEqualThanZero(int value)
+        {
+            return value >= 0;
+        }
+
+        public static bool IsGreaterThanZero(int value)
         {
             return value > 0;
         }

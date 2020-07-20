@@ -28,6 +28,7 @@ namespace FakeBrewery.WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("BreweryContext")));
 
             services.AddScoped<IBreweryService, BreweryService>();
+            services.AddScoped<IWholesalerService, WholesalerService>();
 
             services.AddControllers();
         }
