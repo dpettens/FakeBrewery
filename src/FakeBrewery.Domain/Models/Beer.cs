@@ -14,6 +14,6 @@ namespace FakeBrewery.Domain.Models
         public Guid BreweryId { get; set; }
         public Brewery Brewery { get; set; }
 
-        public ICollection<Stock> Stocks { get; set; }
+        public ICollection<Stock> Stocks { get; set; } = new List<Stock>();
     }
 }

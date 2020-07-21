@@ -8,6 +8,6 @@ namespace FakeBrewery.Domain.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Beer> Beers { get; set; }
+        public ICollection<Beer> Beers { get; set; } = new List<Beer>();
     }
 }
