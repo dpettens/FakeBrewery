@@ -4,6 +4,7 @@ on: [push, pull_request]
 env:
   NETCORE_VERSION: '3.1.101'
   CONFIGURATION: 'Release'
+  WEBAPI_PROJECT_PATH: './src/FakeBrewery.WebApi'
   PUBLISH_FOLDER_PATH: './published'
   ARTIFACT_NAME: drop
   AZURE_WEBAPP_NAME: fakebrewery
@@ -26,7 +27,7 @@ jobs:
     - name: Test app
       run: dotnet test --no-restore --verbosity normal
     - name: Publish app for deploy
-      run: dotnet publish --configuration ${{ env.CONFIGURATION }} --output ${{ env.PUBLISH_FOLDER_PATH }}
+      run: dotnet publish ${{ env.WEBAPI_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.PUBLISH_FOLDER_PATH }}
     - name: Drop published app in an artifact
       uses: actions/upload-artifact@v2
       with:
