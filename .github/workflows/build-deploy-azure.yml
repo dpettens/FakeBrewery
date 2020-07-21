@@ -1,0 +1,53 @@
+name: Build Test and Deploy to Azure
+on: [push, pull_request]
+
+env:
+  NETCORE_VERSION: '3.1.101'
+  CONFIGURATION: 'Release'
+  WEBAPI_PROJECT_PATH: './src/FakeBrewery.WebApi'
+  PUBLISH_FOLDER_PATH: './published'
+  ARTIFACT_NAME: drop
+  AZURE_WEBAPP_NAME: fakebrewery
+
+jobs:
+  build:
+    name: Build and Test App
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core SDK ${{ env.NETCORE_VERSION }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.NETCORE_VERSION }}
+    - name: Restore packages
+      run: dotnet restore
+    - name: Build code
+      run: dotnet build --configuration ${{ env.CONFIGURATION }} --no-restore
+    - name: Test app
+      run: dotnet test --no-restore --verbosity normal
+    - name: Publish app for deploy
+      run: dotnet publish ${{ env.WEBAPI_PROJECT_PATH }} --configuration ${{ env.CONFIGURATION }} --output ${{ env.PUBLISH_FOLDER_PATH }}
+    - name: Drop published app in an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+        path: ${{ env.PUBLISH_FOLDER_PATH }}
+  
+  deploy:
+    # run only on master
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build
+    name: Deploy App
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download drop artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ env.ARTIFACT_NAME }}
+    - name: Deploy to Azure WebApp
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: fakebrewery
+        publish-profile: ${{ secrets.AZURE_WEB_APP_PUBLISH_PROFILE }}
