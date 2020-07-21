@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FakeBrewery.WebApi.Dtos
+namespace FakeBrewery.WebApi.ApiModels
 {
     public class UpdateStockRequest
     {
