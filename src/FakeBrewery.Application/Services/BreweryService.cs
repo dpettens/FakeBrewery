@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using FakeBrewery.Application.Interfaces;
 using FakeBrewery.Domain.Models;
+using FakeBrewery.Domain.Specifications;
 using FakeBrewery.Infra.Data;
 using Microsoft.EntityFrameworkCore;
+using NSpecifications;
 
 namespace FakeBrewery.Application.Services
 {
@@ -27,7 +29,7 @@ namespace FakeBrewery.Application.Services
         /// </returns>
         public async Task<Result<IEnumerable<Beer>>> GetBeersByBreweryAsync(Guid breweryId)
         {
-            if (Validator.IsEmptyGuid(breweryId))
+            if (breweryId == Guid.Empty)
                 return Result.Failure<IEnumerable<Beer>>(null, ResultErrorCode.Validation, "The brewery id should not be empty.");
 
             var brewery = await _context.Breweries.FindAsync(breweryId);
@@ -53,13 +55,13 @@ namespace FakeBrewery.Application.Services
         /// </returns>
         public async Task<Result<Beer>> AddBeerAsync(Beer newBeer)
         {
-            if (Validator.IsNullOrEmpty(newBeer.Name))
+            if (!newBeer.Is(BeerSpecifications.HasValidName))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The name should not be empty.");
-            if(!Validator.IsGreaterOrEqualThanZero(newBeer.Strength))
+            if(!newBeer.Is(BeerSpecifications.HasValidStrength))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The strength should be greater or equal than zero.");
-            if(!Validator.IsGreaterThanZero(newBeer.PriceWithoutVat))
+            if(!newBeer.Is(BeerSpecifications.HasValidPrice))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The price should be greater than zero.");
-            if(Validator.IsEmptyGuid(newBeer.BreweryId))
+            if(!newBeer.Is(BeerSpecifications.HasValidBreweryId))
                 return Result.Failure(newBeer, ResultErrorCode.Validation, "The brewery id should not be empty.");
 
             var brewery = await _context.Breweries.FindAsync(newBeer.BreweryId);
@@ -81,7 +83,7 @@ namespace FakeBrewery.Application.Services
         /// </returns>
         public async Task<Result<Beer>> DeleteBeerAsync(Guid beerId)
         {
-            if (Validator.IsEmptyGuid(beerId))
+            if (beerId == Guid.Empty)
                 return Result.Failure<Beer>(null, ResultErrorCode.Validation, "The beer id should not be empty.");
 
             var beer = await _context.Beers.FindAsync(beerId);

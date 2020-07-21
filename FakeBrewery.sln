@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBrewery.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBrewery.WebApi", "src\FakeBrewery.WebApi\FakeBrewery.WebApi.csproj", "{B79E7FF4-CA15-4FFF-B1DF-8F500EF2E488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBrewery.Application.Tests", "tests\FakeBrewery.Application.Tests\FakeBrewery.Application.Tests.csproj", "{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBrewery.Application.Tests", "tests\FakeBrewery.Application.Tests\FakeBrewery.Application.Tests.csproj", "{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBrewery.Domain.Tests", "tests\FakeBrewery.Domain.Tests\FakeBrewery.Domain.Tests.csproj", "{4A349A37-37E8-4CBE-9DDE-E631BFFA1CF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A349A37-37E8-4CBE-9DDE-E631BFFA1CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A349A37-37E8-4CBE-9DDE-E631BFFA1CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A349A37-37E8-4CBE-9DDE-E631BFFA1CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A349A37-37E8-4CBE-9DDE-E631BFFA1CF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

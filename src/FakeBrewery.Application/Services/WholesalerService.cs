@@ -5,6 +5,7 @@ using FakeBrewery.Application.Dtos;
 using FakeBrewery.Application.Interfaces;
 using FakeBrewery.Application.Specifications;
 using FakeBrewery.Domain.Models;
+using FakeBrewery.Domain.Specifications;
 using FakeBrewery.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using NSpecifications;
@@ -29,11 +30,11 @@ namespace FakeBrewery.Application.Services
         /// </returns>
         public async Task<Result<Stock>> AddStockAsync(Stock newStock)
         {
-            if (!Validator.IsGreaterOrEqualThanZero(newStock.Quantity))
+            if (!newStock.Is(StockSpecifications.HasValidQuantity))
                 return Result.Failure(newStock, ResultErrorCode.Validation, "The quantity should be greater or equal than zero.");
-            if (Validator.IsEmptyGuid(newStock.WholesalerId))
+            if (!newStock.Is(StockSpecifications.HasValidWholesalerId))
                 return Result.Failure(newStock, ResultErrorCode.Validation, "The wholesaler id should not be empty.");
-            if (Validator.IsEmptyGuid(newStock.BeerId))
+            if (!newStock.Is(StockSpecifications.HasValidBeerId))
                 return Result.Failure(newStock, ResultErrorCode.Validation, "The beer id should not be empty.");
 
             var wholesaler = await _context.Wholesalers.FindAsync(newStock.WholesalerId);
@@ -59,9 +60,9 @@ namespace FakeBrewery.Application.Services
         /// </returns>
         public async Task<Result<Stock>> UpdateStockAsync(Stock stockToUpdate)
         {
-            if (Validator.IsEmptyGuid(stockToUpdate.Id))
+            if (!stockToUpdate.Is(StockSpecifications.HasValidId))
                 return Result.Failure(stockToUpdate, ResultErrorCode.Validation, "The id should not be empty.");
-            if (!Validator.IsGreaterOrEqualThanZero(stockToUpdate.Quantity))
+            if (!stockToUpdate.Is(StockSpecifications.HasValidQuantity))
                 return Result.Failure(stockToUpdate, ResultErrorCode.Validation, "The quantity should be greater or equal than zero.");
 
             var stock = await _context.Stocks.FindAsync(stockToUpdate.Id);
