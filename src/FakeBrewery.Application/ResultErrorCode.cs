@@ -3,6 +3,7 @@
     public enum ResultErrorCode
     {
         Validation,
-        NotFound
+        NotFound,
+        Business
     }
 }
