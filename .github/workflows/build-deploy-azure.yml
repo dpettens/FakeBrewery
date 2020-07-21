@@ -35,6 +35,8 @@ jobs:
         path: ${{ env.PUBLISH_FOLDER_PATH }}
   
   deploy:
+    # run only on master
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: build
     name: Deploy App
     runs-on: ubuntu-latest
