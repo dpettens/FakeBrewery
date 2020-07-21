@@ -6,7 +6,7 @@ using AutoMapper;
 using FakeBrewery.Application;
 using FakeBrewery.Application.Interfaces;
 using FakeBrewery.Domain.Models;
-using FakeBrewery.WebApi.Dtos;
+using FakeBrewery.WebApi.ApiModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FakeBrewery.WebApi.Controllers

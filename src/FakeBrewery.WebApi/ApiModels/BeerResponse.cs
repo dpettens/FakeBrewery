@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FakeBrewery.WebApi.Dtos
+namespace FakeBrewery.WebApi.ApiModels
 {
     public class BeerResponse
     {

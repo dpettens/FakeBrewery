@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using FakeBrewery.Application;
+using FakeBrewery.Application.Dtos;
 using FakeBrewery.Application.Interfaces;
 using FakeBrewery.Domain.Models;
-using FakeBrewery.WebApi.Dtos;
+using FakeBrewery.WebApi.ApiModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FakeBrewery.WebApi.Controllers
@@ -49,6 +50,21 @@ namespace FakeBrewery.WebApi.Controllers
                 return NotFound(result.ErrorMessage);
 
             return Ok();
+        }
+
+        [HttpPost("{wholesalerId}/estimates")]
+        public async Task<ActionResult<Stock>> CalculateEstimate(Guid wholesalerId, [FromBody] Order order)
+        {
+            order.WholesalerId = wholesalerId;
+            var result = await _wholesalerService.CalculateEstimate(order);
+
+            if (result.IsFailure && (result.ErrorCode == ResultErrorCode.Validation || result.ErrorCode == ResultErrorCode.Business))
+                return UnprocessableEntity(result.ErrorMessage);
+
+            if (result.IsFailure && result.ErrorCode == ResultErrorCode.NotFound)
+                return NotFound(result.ErrorMessage);
+
+            return Ok(result.Value);
         }
     }
 }

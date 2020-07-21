@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using FakeBrewery.Application.Dtos;
 using FakeBrewery.Domain.Models;
 
 namespace FakeBrewery.Application.Interfaces
@@ -22,5 +23,15 @@ namespace FakeBrewery.Application.Interfaces
         ///     A failure result with NotFound as error code if the stock does not exist.
         /// </returns>
         Task<Result<Stock>> UpdateStockAsync(Stock stockToUpdate);
+
+        /// <summary>Calculate an estimate from an order</summary>
+        /// <param name="order">The order to calculate.</param>
+        /// <returns>
+        ///     A success result with the estimate as value.<br />
+        ///     A failure result with Validation as error code if order has validation errors.<br />
+        ///     A failure result with NotFound as error code if the wholesaler or any beers do not exist.<br />
+        ///     A failure result with Business as error code if order asks for beers not sold by the wholesaler.
+        /// </returns>
+        Task<Result<Estimate>> CalculateEstimate(Order order);
     }
 }

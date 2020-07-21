@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NSpecifications" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FakeBrewery.Domain\FakeBrewery.Domain.csproj" />
     <ProjectReference Include="..\FakeBrewery.Infra.Data\FakeBrewery.Infra.Data.csproj" />
   </ItemGroup>

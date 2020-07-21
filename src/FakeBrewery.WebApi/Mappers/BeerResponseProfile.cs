@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using FakeBrewery.Domain.Models;
-using FakeBrewery.WebApi.Dtos;
+using FakeBrewery.WebApi.ApiModels;
 
 namespace FakeBrewery.WebApi.Mappers
 {

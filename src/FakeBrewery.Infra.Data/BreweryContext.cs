@@ -6,11 +6,15 @@ namespace FakeBrewery.Infra.Data
 {
     public class BreweryContext : DbContext
     {
-        public DbSet<Beer> Beers { get; set; }
-        public DbSet<Brewery> Breweries { get; set; }
-        public DbSet<Stock> Stocks { get; set; }
-        public DbSet<Wholesaler> Wholesalers { get; set; }
-        
+        public virtual DbSet<Beer> Beers { get; set; }
+        public virtual DbSet<Brewery> Breweries { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<Wholesaler> Wholesalers { get; set; }
+
+        public BreweryContext()
+        {
+        }
+
         public BreweryContext(DbContextOptions<BreweryContext> options) : base(options)
         {
         }

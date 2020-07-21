@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBrewery.Domain", "src\FakeBrewery.Domain\FakeBrewery.Domain.csproj", "{904D87F6-545A-4FF3-891F-4445919BFDD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBrewery.Domain", "src\FakeBrewery.Domain\FakeBrewery.Domain.csproj", "{904D87F6-545A-4FF3-891F-4445919BFDD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBrewery.Infra.Data", "src\FakeBrewery.Infra.Data\FakeBrewery.Infra.Data.csproj", "{3DE7D1AC-6B97-41E5-A5AE-12473ECD910A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBrewery.Infra.Data", "src\FakeBrewery.Infra.Data\FakeBrewery.Infra.Data.csproj", "{3DE7D1AC-6B97-41E5-A5AE-12473ECD910A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBrewery.Application", "src\FakeBrewery.Application\FakeBrewery.Application.csproj", "{4682A074-04F8-4DF6-A801-18BFB63DFF6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBrewery.Application", "src\FakeBrewery.Application\FakeBrewery.Application.csproj", "{4682A074-04F8-4DF6-A801-18BFB63DFF6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBrewery.WebApi", "src\FakeBrewery.WebApi\FakeBrewery.WebApi.csproj", "{B79E7FF4-CA15-4FFF-B1DF-8F500EF2E488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeBrewery.WebApi", "src\FakeBrewery.WebApi\FakeBrewery.WebApi.csproj", "{B79E7FF4-CA15-4FFF-B1DF-8F500EF2E488}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeBrewery.Application.Tests", "tests\FakeBrewery.Application.Tests\FakeBrewery.Application.Tests.csproj", "{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B79E7FF4-CA15-4FFF-B1DF-8F500EF2E488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B79E7FF4-CA15-4FFF-B1DF-8F500EF2E488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B79E7FF4-CA15-4FFF-B1DF-8F500EF2E488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2EADF73-0415-46BE-A644-DC2DA6E3A1F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
